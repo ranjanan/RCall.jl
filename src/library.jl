@@ -1,5 +1,5 @@
 ## a list of reserved names from PyCall.jl
-const reserved = Set{AbstractString}()
+const reserved = Set{ASCIIString}()
 for w in ("while", "if", "for", "try", "return", "break",
           "continue", "function", "macro", "quote", "let", "local",
           "global", "const", "abstract", "typealias", "type",

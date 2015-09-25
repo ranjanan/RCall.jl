@@ -32,8 +32,8 @@ for sym in (:isArray,:isComplex,:isEnvironment,:isExpression,:isFactor,
             :isFrame,:isFree,:isFunction,:isInteger,:isLanguage,:isList,
             :isLogical,:isSymbol,:isMatrix,:isNewList,:isNull,:isNumeric,
             :isNumber,:isObject,:isOrdered,:isPairListSxp,:isPrimitiveSxp,
-            :isReal,:isS4,:isAbstractString,:isTs,:isUnordered,:isUnsorted,
-            :isUserBinop,:isValidAbstractString,:isValidAbstractStringF,:isVector,
+            :isReal,:isS4,:isString,:isTs,:isUnordered,:isUnsorted,
+            :isUserBinop,:isValidString,:isValidStringF,:isVector,
             :isVectorAtomicSxp,:isVectorizable,:isVectorListSxp)
     @eval begin
         $sym{S<:Sxp}(s::Ptr{S}) = ccall(($(string("Rf_",sym)),libR),Bool,(Ptr{SxpPtrInfo},),s)
@@ -84,7 +84,7 @@ getindex{S<:VectorListSxp}(s::Ptr{S}, I::AbstractVector) = sexp(getindex(unsafe_
 getindex{S<:VectorListSxp}(s::Ptr{S}, I::Real...) = sexp(getindex(unsafe_array(s),I...))
 
 """
-AbstractString indexing finds the first element with the matching name
+String indexing finds the first element with the matching name
 """
 function getindex{S<:VectorSxp}(s::Ptr{S}, label::AbstractString)
     ls = unsafe_vec(getNames(s))
@@ -272,7 +272,7 @@ NAel(::Type{LglSxp}) = rNaInt
 NAel(::Type{IntSxp}) = rNaInt
 NAel(::Type{RealSxp}) = rNaReal
 NAel(::Type{CplxSxp}) = complex(rNaReal,rNaReal)
-NAel(::Type{StrSxp}) = rNaAbstractString
+NAel(::Type{StrSxp}) = rNaString
 NAel(::Type{VecSxp}) = sexp(LglSxp,rNaInt) # used for setting
 
 
