@@ -1,5 +1,5 @@
 ## a list of reserved names from PyCall.jl
-const reserved = Set{ASCIIString}()
+const reserved = Set{AbstractString}()
 for w in ("while", "if", "for", "try", "return", "break",
           "continue", "function", "macro", "quote", "let", "local",
           "global", "const", "abstract", "typealias", "type",
@@ -9,7 +9,7 @@ for w in ("while", "if", "for", "try", "return", "break",
     push!(reserved, w) # construct Set this way for compat with Julia 0.2/0.3
 end
 
-function rwrap(pkg::ASCIIString,s::Symbol)
+function rwrap(pkg::AbstractString,s::Symbol)
     reval("library($pkg)")
     members = rcopy("ls('package:$pkg')")
     filter!(x -> !(x in reserved), members)

@@ -1,4 +1,6 @@
-@doc "Create a function call from a list of arguments"->
+"""
+Create a function call from a list of arguments
+"""
 function rlang_p(f, args...; kwargs...)
     argn = length(args)+length(kwargs)
     s = l = protect(allocArray(LangSxp,argn+1))
@@ -18,13 +20,10 @@ end
 
 rlang(f, args...; kwargs...) = RObject(rlang_p(f,args...; kwargs...))
 
-@doc """
+"""
 Evaluate a function in the global environment. The first argument corresponds
 to the function to be called. It can be either a FunctionSxp type, a SymSxp or
-a Symbol."""->
+a Symbol.
+"""
 rcall(f,args...;kwargs...) = reval(rlang_p(f,args...;kwargs...))
 rcall_p(f,args...;kwargs...) = reval_p(rlang_p(f,args...;kwargs...))
-
-if VERSION >= v"v0.4-"
-    Base.call{S<:Union(SymSxp,LangSxp,FunctionSxp)}(f::RObject{S},args...;kwargs...) = rcall(f,args...;kwargs...)
-end

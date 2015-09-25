@@ -1,9 +1,5 @@
 module RCall
-using Compat,DataFrames,DataArrays
-
-if VERSION < v"v0.4-"
-    using Docile                    # for the @doc macro
-end
+using DataFrames,DataArrays
 
 import Base: eltype, show, convert, isascii,
     length, size, getindex, setindex!, start, next, done

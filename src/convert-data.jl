@@ -86,4 +86,3 @@ function rlang_formula(e::Expr)
     end
 end
 rlang_formula(e::Symbol) = e
-        

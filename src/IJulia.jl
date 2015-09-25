@@ -5,7 +5,7 @@
 
 ijulia_mime = nothing
 
-@doc """
+"""
 Set options for R plotting with IJulia.
 
 The first argument should be a MIME object: currently supported are
@@ -14,7 +14,7 @@ The first argument should be a MIME object: currently supported are
 
 The remaining arguments (keyword only) are passed to the appropriate R graphics
 device: see the relevant R help for details.
-"""->
+"""
 function ijulia_setdevice(m::MIME;kwargs...)
     global ijulia_mime
     rcall(:options,rcalljl_device=rdevicename(m))
@@ -47,10 +47,10 @@ function ijulia_displayfile(m::MIME"image/svg+xml", f)
     end
 end
 
-@doc """
+"""
 Called after cell evaluation.
 Closes graphics device and displays files in notebook.
-"""->
+"""
 function ijulia_displayplots()
     if rcopy(Int,"dev.cur()") != 1
         rcopy(Int,"dev.off()")
