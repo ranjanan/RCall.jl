@@ -77,7 +77,7 @@ rcopy(::Type{Symbol},s::CharSxpPtr) = symbol(rcopy(AbstractString,s))
 Create a `StrSxp` from a `AbstractString`
 """
 sexp(::Type{StrSxp}, s::CharSxpPtr) =
-    ccall((:Rf_ScalarAbstractString,libR),Ptr{StrSxp},(CharSxpPtr,),s)
+    ccall((:Rf_ScalarString,libR),Ptr{StrSxp},(CharSxpPtr,),s)
 
 sexp(::Type{StrSxp},st::AbstractString) = sexp(StrSxp,sexp(CharSxp,st))
 
