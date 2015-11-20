@@ -37,6 +37,7 @@ include("eventloop.jl")
 include("callback.jl")
 include("IJulia.jl")
 include("io.jl")
+include("operators.jl")
 
 
 type Rinstance
